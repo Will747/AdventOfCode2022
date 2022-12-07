@@ -26,9 +26,9 @@ public class Day06 : BaseDay
                 }
             }
 
-           if (!matchingCharacter) {
-            return i + length;
-           }
+            if (!matchingCharacter) {
+                return i + length;
+            }
         }
 
         return -1;

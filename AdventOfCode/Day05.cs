@@ -2,13 +2,13 @@ namespace AdventOfCode;
 
 public class Day05 : BaseDay
 {
-    private List<char>[] stacks1;
-    private List<char>[] stacks2;
+    private readonly List<char>[] _stacks1;
+    private readonly List<char>[] _stacks2;
     private readonly string[] _commands;
 
     public Day05()
     {
-        String[] input = File.ReadAllText(InputFilePath).Split('\n');
+        var input = File.ReadAllText(InputFilePath).Split('\n');
     
         // Find the line number where the bottom of the stack starts
         var stackStartIdx = -1;
@@ -25,23 +25,23 @@ public class Day05 : BaseDay
         }
 
         // Initialize all lists
-        stacks1 = new List<char>[numOfStacks];
-        stacks2 = new List<char>[numOfStacks];
-        for (int x = 0; x < numOfStacks; x++) 
+        _stacks1 = new List<char>[numOfStacks];
+        _stacks2 = new List<char>[numOfStacks];
+        for (var x = 0; x < numOfStacks; x++) 
         {
-            stacks1[x] = new List<char>();
-            stacks2[x] = new List<char>();
+            _stacks1[x] = new List<char>();
+            _stacks2[x] = new List<char>();
         }
 
         // Generate stacks
-        for (int x = stackStartIdx; x >= 0; x--) 
+        for (var x = stackStartIdx; x >= 0; x--) 
         {
-            for (int y = 0; y < numOfStacks; y++) 
+            for (var y = 0; y < numOfStacks; y++) 
             {
-                char item = input[x][y * 4 + 1];
+                var item = input[x][y * 4 + 1];
                 if (item != ' ') {
-                    stacks1[y].Add(item);
-                    stacks2[y].Add(item);
+                    _stacks1[y].Add(item);
+                    _stacks2[y].Add(item);
                 }
             }
         }
@@ -58,7 +58,7 @@ public class Day05 : BaseDay
 
     public override ValueTask<string> Solve_1()
     {
-        var stacks = stacks1;
+        var stacks = _stacks1;
         foreach (var command in _commands) 
         {
             var components = command.Split(' ');
@@ -77,18 +77,14 @@ public class Day05 : BaseDay
             }
         }
 
-        var message = "";
-        foreach (var stack in stacks) 
-        {
-            message += stack[stack.Count - 1];
-        }
+        var message = stacks.Aggregate("", (current, stack) => current + stack[^1]);
 
         return new ValueTask<string>(message);
     }
 
     public override ValueTask<string> Solve_2()
     {
-        var stacks = stacks2;
+        var stacks = _stacks2;
         foreach (var command in _commands) 
         {
             var components = command.Split(' ');
@@ -103,11 +99,7 @@ public class Day05 : BaseDay
             stacks[moveTo].AddRange(itemsBeingMoved);
         }
 
-        var message = "";
-        foreach (var stack in stacks) 
-        {
-            message += stack[stack.Count - 1];
-        }
+        var message = stacks.Aggregate("", (current, stack) => current + stack[^1]);
 
         return new ValueTask<string>(message);
     }
