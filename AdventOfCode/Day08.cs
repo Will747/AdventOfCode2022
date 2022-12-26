@@ -6,12 +6,12 @@ public class Day08 : BaseDay
 
     public Day08()
     {
-        String[] input = File.ReadAllText(InputFilePath).Split('\n');
-        int xSize = input[0].Length;
+        var input = File.ReadAllText(InputFilePath).Split('\n');
+        var xSize = input[0].Length - 1;
 
-        _input = new int[xSize, input.Count()];
-        
-        for (var y = 0; y < input.Count(); y++) {
+        _input = new int[xSize, input.Length];
+
+        for (var y = 0; y < input.Length; y++) {
             for (var x = 0; x < xSize; x++) {
                 _input[x, y] = input[y][x];
             }
@@ -19,8 +19,8 @@ public class Day08 : BaseDay
     }
 
     private bool IsVisibleTree(int x, int y, int xDirection, int yDirection) {
-        int heightOfTree = _input[x, y];
-        bool visible = true;
+        var heightOfTree = _input[x, y];
+        var visible = true;
         x += xDirection;
         y += yDirection;
         while (visible && x >= 0 && x < _input.GetLength(0) && y >= 0 && y < _input.GetLength(1)) {
@@ -35,10 +35,10 @@ public class Day08 : BaseDay
         return visible;
     }
 
-    private int getVisibleDistance(int x, int y, int xDirection, int yDirection) {
-        int heightOfTree = _input[x, y];
-        int distance = 0;
-        bool visible = true;
+    private int GetVisibleDistance(int x, int y, int xDirection, int yDirection) {
+        var heightOfTree = _input[x, y];
+        var distance = 0;
+        var visible = true;
         x += xDirection;
         y += yDirection;
         while (visible && x >= 0 && x < _input.GetLength(0) && y >= 0 && y < _input.GetLength(1)) {
@@ -57,7 +57,7 @@ public class Day08 : BaseDay
 
     public override ValueTask<string> Solve_1()
     {
-        int total = 0;
+        var total = 0;
         // Count number of tree on the edges of the forest
         total += _input.GetLength(0) * 2;
         total += (_input.GetLength(1) - 2) * 2;
@@ -65,7 +65,7 @@ public class Day08 : BaseDay
         // Check all central trees (Trees that aren't on the edge)
         for (var x = 1; x < _input.GetLength(0) - 1; x++) {
             for (var y = 1; y < _input.GetLength(1) - 1; y++) {
-                bool visible =
+                var visible =
                 // Check if visible from any direction
                 IsVisibleTree(x, y, 0, 1) // UP
                 || IsVisibleTree(x, y, 0, -1) // DOWN
@@ -82,16 +82,16 @@ public class Day08 : BaseDay
 
     public override ValueTask<string> Solve_2()
     {
-        int bestScenicScore = 0;
+        var bestScenicScore = 0;
 
         for (var x = 0; x < _input.GetLength(0); x++) {
             for (var y = 0; y < _input.GetLength(1); y++) {
-                int score =
+                var score =
                 // Check if visible from any direction
-                getVisibleDistance(x, y, 0, 1) // UP
-                * getVisibleDistance(x, y, 0, -1) // DOWN
-                * getVisibleDistance(x, y, 1, 0) // RIGHT
-                * getVisibleDistance(x, y, -1, 0); //LEFT
+                GetVisibleDistance(x, y, 0, 1) // UP
+                * GetVisibleDistance(x, y, 0, -1) // DOWN
+                * GetVisibleDistance(x, y, 1, 0) // RIGHT
+                * GetVisibleDistance(x, y, -1, 0); //LEFT
 
                 if (score > bestScenicScore) {
                     bestScenicScore = score;
