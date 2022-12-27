@@ -8,7 +8,7 @@ public class Day05 : BaseDay
 
     public Day05()
     {
-        var input = File.ReadAllText(InputFilePath).Split('\n');
+        var input = File.ReadAllLines(InputFilePath);
     
         // Find the line number where the bottom of the stack starts
         var stackStartIdx = -1;

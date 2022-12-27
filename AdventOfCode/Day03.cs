@@ -6,7 +6,7 @@ public class Day03 : BaseDay
 
     public Day03()
     {
-        _input = File.ReadAllText(InputFilePath).Split('\n');
+        _input = File.ReadAllLines(InputFilePath);
     }
 
     private static int GetValueOfChar(char value)

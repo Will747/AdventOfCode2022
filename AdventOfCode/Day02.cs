@@ -6,7 +6,7 @@ public class Day02 : BaseDay
 
     public Day02()
     {
-        _input = File.ReadAllText(InputFilePath).Split('\n');
+        _input = File.ReadAllLines(InputFilePath);
     }
 
     private int OpponentCode(char code) {

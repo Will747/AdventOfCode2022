@@ -6,7 +6,7 @@ public class Day01 : BaseDay
 
     public Day01()
     {
-        _input = File.ReadAllText(InputFilePath).Split('\n');
+        _input = File.ReadAllLines(InputFilePath);
     }
 
     public override ValueTask<string> Solve_1()

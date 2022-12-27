@@ -10,7 +10,7 @@ public class Day07 : BaseDay
 
     public Day07()
     {
-        _input = File.ReadAllText(InputFilePath).Split("\r\n");
+        _input = File.ReadAllLines(InputFilePath);
         _directories = new Dictionary<string, List<string>>();
         _directorySizes = new Dictionary<string, int>();
     }
