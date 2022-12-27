@@ -7,7 +7,7 @@ public class Day08 : BaseDay
     public Day08()
     {
         var input = File.ReadAllLines(InputFilePath);
-        var xSize = input[0].Length - 1;
+        var xSize = input[0].Length;
 
         _input = new int[xSize, input.Length];
 
