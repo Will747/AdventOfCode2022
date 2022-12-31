@@ -9,23 +9,6 @@ public class Day09 : BaseDay
         _input = File.ReadAllLines(InputFilePath);
     }
 
-    private struct Vector
-    {
-        public int X;
-        public int Y;
-
-        public Vector(int x, int y)
-        {
-            X = x;
-            Y = y;
-        }
-
-        public override string ToString()
-        {
-            return X + "," + Y;
-        }
-    }
-
     private static bool MoveTail(Vector head, ref Vector tail)
     {
         var dist = new Vector
